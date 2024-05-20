@@ -20,7 +20,6 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            padding: 1em;
             padding-bottom: 6em; /* Add padding to ensure space above footer */
             min-height: calc(100vh - 150px); /* Ensure the main content reaches the top of the footer */
         }
@@ -37,6 +36,10 @@
         .column h2 {
             margin-top: 0;
             color: white; /* Ensure text is visible against dark background */
+        }
+        .column p, .column #datetime {
+            color: white; /* Changed text color to white */
+            font-weight: bold; /* Made text bold */
         }
         .p5-wrapper {
             display: flex;
@@ -365,6 +368,14 @@ function draw() {
         }
     </script>
     <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-Y"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-XXXXX-Y');
+    </script>
+</head>
 <body onload="showPage('home-page')">
     <header>
         <h1>Debjyoti Sarker's Website</h1>
