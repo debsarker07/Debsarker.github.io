@@ -20,33 +20,40 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            align-items: flex-start;
+            gap: 1em;
+            padding: 1em;
             padding-bottom: 6em; /* Add padding to ensure space above footer */
             min-height: calc(100vh - 150px); /* Ensure the main content reaches the top of the footer */
         }
         .column {
             background-color: rgba(34, 34, 34, 0.8); /* Translucent dark gray */
             border: 1px solid #ccc;
-            margin: 1em;
             padding: 1em;
-            margin-bottom: 2em; /* Space between column and footer */
-            width: calc(33.333% - 2em);
             box-sizing: border-box;
             text-align: center;
+            color: white;
+            flex-grow: 1; /* Allow columns to grow and shrink */
+            display: flex;
+            flex-direction: column;
         }
         .column h2 {
             margin-top: 0;
-            color: white; /* Ensure text is visible against dark background */
         }
-        .column p, .column #datetime {
-            color: white; /* Changed text color to white */
-            font-weight: bold; /* Made text bold */
+        .column-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .p5-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 600px; /* Ensure enough space for the canvas */
-            width: 100%;
+        }
+        #p5-sketch {
+            height: 580px;
+            width: 360px;
         }
         footer {
             color: white;
@@ -357,6 +364,8 @@ function draw() {
         function updateDateTime() {
             const now = new Date();
             document.getElementById('datetime').textContent = now.toString();
+            document.getElementById('datetime').style.color = "white";
+            document.getElementById('datetime').style.fontWeight = "bold";
         }
         setInterval(updateDateTime, 1000);
 
@@ -366,6 +375,29 @@ function draw() {
             });
             document.getElementById(pageId).style.display = 'block';
         }
+
+        function adjustColumnHeights() {
+            const columns = document.querySelectorAll('.column');
+            let maxHeight = 0;
+
+            // Calculate the maximum height
+            columns.forEach(column => {
+                if (column.offsetHeight > maxHeight) {
+                    maxHeight = column.offsetHeight;
+                }
+            });
+
+            // Apply the maximum height to all columns
+            columns.forEach(column => {
+                column.style.height = maxHeight + 'px';
+            });
+        }
+
+        window.onload = function() {
+            showPage('home-page');
+            adjustColumnHeights();
+        };
+        window.onresize = adjustColumnHeights;
     </script>
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-Y"></script>
@@ -376,7 +408,7 @@ function draw() {
         gtag('config', 'UA-XXXXX-Y');
     </script>
 </head>
-<body onload="showPage('home-page')">
+<body>
     <header>
         <h1>Debjyoti Sarker's Website</h1>
     </header>
@@ -390,7 +422,7 @@ function draw() {
             </div>
             <div class="column">
                 <h2>Google Analytics</h2>
-                <p>Google Analytics is active on this page.</p>
+                <p style="color: white; font-weight: bold;">Google Analytics is active on this page.</p>
             </div>
             <div class="column">
                 <h2>Tic Tac Toe (Not Impossible)</h2>
