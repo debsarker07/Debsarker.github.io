@@ -7,6 +7,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             background: url('https://i.pinimg.com/originals/a2/3f/03/a23f03f4cc66d800bd3b6dbc2c883dc0.jpg') no-repeat center center fixed;
+            background-size: cover;
         }
         header {
             color: white;
@@ -32,7 +33,7 @@
             box-sizing: border-box;
             text-align: center;
             color: white;
-            flex-grow: 1; /* Allow columns to grow and shrink */
+            flex: 1 1 calc(33.333% - 2em); /* Flex properties to make columns equal width */
             display: flex;
             flex-direction: column;
         }
@@ -398,7 +399,13 @@ function draw() {
         };
         window.onresize = adjustColumnHeights;
     </script>
-    <!-- Google Analytics -->;
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-Y"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-XXXXX-Y');
     </script>
 </head>
 <body>
