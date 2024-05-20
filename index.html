@@ -27,7 +27,7 @@
         }
         .column {
             background-color: rgba(34, 34, 34, 0.8); /* Translucent dark gray */
-            border: 1px solid #353b3d; /* Updated border color */
+            border: 1px solid #353b3d; /* border color */
             padding: 1em;
             box-sizing: border-box;
             text-align: center;
@@ -407,6 +407,7 @@ function draw() {
         };
         window.onresize = adjustColumnHeights;
     </script>
+    <script src="https://cdn.commoninja.com/sdk/latest/commonninja.js" defer></script>
 </head>
 <body>
     <header>
@@ -419,6 +420,7 @@ function draw() {
             <div class="column">
                 <h2>Widget 1: Current Date and Time</h2>
                 <div id="datetime"></div>
+                <div class="commonninja_component pid-06124f18-357c-4056-9028-9418de952f8d"></div>
             </div>
             <div class="column">
                 <h2>My Playlist</h2>
