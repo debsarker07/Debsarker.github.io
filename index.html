@@ -71,6 +71,9 @@
         footer a:hover {
             text-decoration: underline;
         }
+        #date {
+            font-size: 1.5em; /* Adjust the value as needed */
+        }
     </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SFNY3YTV08"></script>
@@ -370,6 +373,15 @@ function draw() {
   checkWin(decisionArray);
 }
 
+        function updateDateTime() {
+            const now = new Date();
+            const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('date').textContent = now.toLocaleDateString('en-US', dateOptions);
+            document.getElementById('date').style.color = "white";
+            document.getElementById('date').style.fontWeight = "bold";
+        }
+        setInterval(updateDateTime, 1000);
+
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => {
                 page.style.display = 'none';
@@ -412,6 +424,7 @@ function draw() {
         <main>
             <div class="column">
                 <h2>Current Date and Time</h2>
+                <div id="date"></div> <!-- Added date div -->
                 <div id="datetime"></div>
                 <div class="commonninja_component pid-06124f18-357c-4056-9028-9418de952f8d"></div>
             </div>
