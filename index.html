@@ -208,54 +208,253 @@
             return bestScore;
         }
 
-        function computerRandomMove(grid1, grid2) {
-            for (let i = 0; i < 3; i++) {
-                for (let j = 0; j < 3; j++) {
-                    grid2[i][j] = grid1[i][j];
-                }
-            }
+              function computerRandomMove(grid1, grid2) {
+        //takes grid1 and grid2 as an argument for crm so it can calculate
+        for (let i = 0; i < 3; i++) {
+          //creates the rows in grid 1
+          for (let j = 0; j < 3; j++) {
+            //creates the columns for the rows in grid 1
+            grid2[i][j] = grid1[i][j]; //says the rows and collumns are the same for both grids
+          }
+        } //given in lesson notes by mr j
 
-            for (let k = 1; k <= 9; k++) {
-                let row = floor((k - 1) / 3);
-                let col = (k - 1) % 3;
+        for (let k = 1; k <= 9; k++) {
+          row = floor((k - 1) / 3);
+          col = (k - 1) % 3;
 
-                if (grid2[row][col] == "0") {
-                    grid2[row][col] = "O";
+          if (grid2[row][col] == "0") {
+            grid2[row][col] = "O"; // the if statement checks to see if the row and column of grid2 has a value of 0 (no X or O on it) so it can put an O on it.
 
-                    if (winConfirmed(grid2)) {
-                        grid1[row][col] = "O";
-                        return k;
-                    }
+            if (winConfirmed(grid2)) {
+              //checks to see if the game has been won
 
-                    grid2[row][col] = "0";
-                }
-            }
+              grid1[row][col] = "O"; //then puts an O in the cell depending on the combinations below.
 
-            for (let i = 0; i < 3; i++) {
-                for (let j = 0; j < 3; j++) {
-                    grid2[i][j] = grid1[i][j];
-                }
-            }
+              console.log("k=" + k); //logs the value of k in the console.
 
-            for (let k = 1; k <= 9; k++) {
-                let row = floor((k - 1) / 3);
-                let col = (k - 1) % 3;
+              return k;
+            } //for
+            //checks to see if theres any Xs on the square before putting an o
 
-                if (grid2[row][col] == "0") {
-                    grid2[row][col] = "X";
-                    if (winConfirmed(grid2)) {
-                        grid1[row][col] = "O";
-                        return k;
-                    }
+            grid2[row][col] = "0"; //sets 0 as the value of the row and column if the computer did its move on it
+          } //if
+        } //for k
+        for (let i = 0; i < 3; i++) {
+          // assigns i to 0 and increases it by one every iteration until i reaches 3
+          for (let j = 0; j < 3; j++) {
+            //assigns j to 0 and increases it by one every iteration until j reaches 3
+            grid2[i][j] = grid1[i][j]; //says the two grids are equal
+          } //inner for
+        } //outer for
+        for (let k = 1; k <= 9; k++) {
+          row = floor((k - 1) / 3);
+          col = (k - 1) % 3;
 
-                    grid2[row][col] = "0";
-                }
-            }
+          if (grid2[row][col] == "0") {
+            //checks if the cell is empty
+            grid2[row][col] = "X"; //if it is then it fills it with an X
+            if (winConfirmed(grid2)) {
+              //checks to see if the move is a winning move
+              grid1[row][col] = "O"; //places a O in the winning spot
+              console.log("k=" + k);
+              return k;
+            } //gives the computer the win
 
-            let bestMove = findBestMove(grid1, 'O');
-            grid1[bestMove.row][bestMove.col] = "O";
-            return bestMove.row * 3 + bestMove.col + 1;
-        }
+            grid2[row][col] = "0";
+          } //if
+        } //for k
+
+        if (moveCount == 1) {
+          //nested if
+          if (grid1[2][1] == "X") {
+            grid1[1][1] = "O";
+            return 5; //[1][1]
+          } //if
+        } //if mc==1
+        //*SPECIFIC MOVE NUMBER 1: If you put an x on [2][1] as an opening the code will put an O in [1][1] The code for this may be found at line number “128”
+
+        if (moveCount == 3) {
+          //nested if
+          if (grid1[1][2] == "X" && grid1[0][0] == "X") {
+            grid1[0][2] = "O";
+            return 3; //[0][2]
+          } //if
+          else if (grid1[2][1] == "X" && grid1[0][0] == "X") {
+            grid1[2][0] = "O";
+            return 7; //[2][0]
+          } //if
+        } //if mc==3
+        //*SPECIFIC MOVE NUMBER 2: If you put X in [1][2] and then [0][0] the code will put a circle in [2][2]
+
+        //*SPECIFIC MOVE NUMBER 3: If you put an X in [0][0] and then in [2][1] the code will put a circle in [2][0]
+
+        if (moveCount == 1) {
+          //nested if
+          if (grid1[0][0] == "X") {
+            grid1[1][1] = "O";
+            return 5; //[1][1]
+          } //if
+        } //if mc==1
+        //if you put an X on [0][0] the code will put an O on [1][1].
+        if (moveCount == 1) {
+          //if
+          if (grid1[2][0] == "X") {
+            grid1[1][1] = "O";
+            return 5; //[1][1]
+          } //if
+        } //if mc==1
+        //*SPECIFIC MOVE NUMBER 4:If you put an X in [2][0] as an opening, the code will put a circle in [1][1]
+        if (moveCount == 1) {
+          if (grid1[0][1] == "X") {
+            grid1[1][1] = "O";
+            return 5; //[1][1]
+          } //if
+        } //if mc==1
+        //*SPECIFIC MOVE NUMBER 5: if you put an X on [0][1] as an opening the code will put an O on [1][1]
+        if (moveCount == 1) {
+          //nested if
+          if (grid1[1][2] == "X") {
+            grid1[1][1] = "O";
+            return 5; //[1][1]
+          } //if
+        } //if mc==1
+        //*SPECIFIC MOVE NUMBER 6:If you put an x on [1][2] as an opening the code will put an O in [1][1]
+        if (moveCount == 1) {
+          //nested if
+          if (grid1[1][0] == "X") {
+            grid1[1][1] = "O";
+            return 5; //[1][1]
+          } //if
+        } //if mc==1
+        if (moveCount == 1) {
+          //nested if
+          if (grid1[1][1] == "X") {
+            grid1[0][0] = "O";
+            return 1; //[0][0]
+          } //if
+        } //if mc==1
+        //*SPECIFIC MOVE NUMBER 7: If you put an x on [1][1] as an opening the code will put an O in [0][0]
+        if (moveCount == 3) {
+          //nested if
+          if (grid1[1][0] == "X" && grid1[2][2] == "X") {
+            grid1[2][0] = "O";
+            return 7; //[2][0]
+          } //if
+          else if (grid1[0][1] == "X" && grid1[2][2] == "X") {
+            grid1[0][2] = "O";
+            return 3; //[0][2]
+          } //if
+        } //if mc==3
+        //*SPECIFIC MOVE NUMBER 8: If you put an X in [1][0] after [2][2] the code will put a circle in [2][0].
+        //*SPECIFIC MOVE NUMBER 8: If you put an X in [0][1] after [2][2] the code will put a circle in [0][2]
+
+        if (moveCount == 1) {
+          //nested if
+          if (grid1[2][2] == "X") {
+            grid1[1][1] = "O";
+            return 5; //[1][1]
+          } //if
+        } //if mc==1
+        //*SPECIFIC MOVE NUMBER 9: If you put an x on [2][2] as an opening the code will put an O in [1][1]
+        if (moveCount == 3) {
+          //nested if
+          if (grid1[1][2] == "X" && grid1[2][0] == "X") {
+            grid1[2][2] = "O";
+            return 9; //[2][2]
+          } //if
+          else if (grid1[0][1] == "X" && grid1[2][0] == "X") {
+            grid1[0][0] = "O";
+            return 1; //[0][0]
+          } //if
+        } //if mc==3
+        //*SPECIFIC MOVE NUMBER 10: If you put an X in [1][2] after [2][0] the code will put a circle in [2][2]
+        //*SPECIFIC MOVE NUMBER 11: If you put an X in [0][1] after [2][0] the code will put a circle in [0][0]
+        if (moveCount == 1) {
+          //nested if
+          if (grid1[0][2] == "X") {
+            grid1[1][1] = "O";
+            return 5; //[1][1]
+          } //if
+        } //if mc==1
+        //*SPECIFIC MOVE NUMBER 12: If you put an x on [0][2] as an opening the code will put an O in [1][1]
+        //*SPECIFIC MOVE NUMBER 13: if you put an X in [1][0] as an opening, the code will put a circle in [1][1].
+        if (moveCount == 1) {
+          //nested if
+          if (grid1[0][2] == "X") {
+            grid1[1][1] = "O";
+            return 5; //[1][1]
+          } //if
+        } //if mc==1
+        //*SPECIFIC MOVE NUMBER 14: If you put an x on [0][2] as an opening the code will put an O in [1][1
+        if (moveCount == 3) {
+          //nested if
+          if (grid1[1][0] == "X" && grid1[0][2] == "X") {
+            grid1[0][0] = "O";
+            return 1; //[0][0]
+          } //if
+          else if (grid1[2][1] == "X" && grid1[0][2] == "X") {
+            grid1[2][2] = "O";
+            return 9; //[2][2]
+          } //if
+        } //if mc==3
+        //*SPECIFIC MOVE NUMBER 15: If you put an X in [1][0] after [0][2] the code will put a circle in [0][0]
+        //*SPECIFIC MOVE NUMBER 16: If you put an X in [2][1] after [0][2] the code will put a circle in [2][2]
+        if (moveCount == 3) {
+          //nested if
+          if (grid1[0][1] == "X" && grid1[1][2] == "X") {
+            grid1[0][2] = "O";
+            return 3;
+          } //if
+          else if (grid1[1][0] == "X" && grid1[0][1] == "X") {
+            grid1[0][0] = "O";
+            return 1;
+          } //else if
+          else if (grid1[1][0] == "X" && grid1[2][1] == "X") {
+            grid1[2][0] = "O";
+            return 7;
+          } //else if
+          else if (grid1[1][2] == "X" && grid1[2][1] == "X") {
+            grid1[2][2] = "O";
+            return 9;
+          } //else if
+        } //if mc==3
+        //*SPECIFIC MOVE NUMBER 17: If you put an X in [0][1] after [1][2] tje code will put a circle in [0][2]
+        //*SPECIFIC MOVE NUMBER 18: If you put an X in [1][0] after [0][1] the code will put a circle in [0][0]
+        //*SPECIFIC MOVE NUMBER 19: If you put an X in [1][1] after [2][1] the code will put a circle in [2][0]
+        //*SPECIFIC MOVE NUMBER 20: If you put an X in [1][2] after [2][1] the code will put a cirlce in [2][2]
+        if (moveCount == 3) {
+          //nested if
+          if (grid1[0][0] == "X" && grid1[2][2] == "X") {
+            grid1[1][0] = "O";
+            return 4; //[1][0]
+          } //if
+          else if (grid1[2][0] == "X" && grid1[0][2] == "X") {
+            grid1[1][0] = "O";
+            return 4; //[1][0]
+          } //if
+        } //if mc==3
+        //*SPECIFIC MOVE NUMBER 21: If you put an X in [0][0] after [2][2] the code will put a circle in [1][0]
+        if (moveCount == 3) {
+          //nested if
+          if (grid1[1][1] == "X" && grid1[2][2] == "X") {
+            grid1[2][0] = "O";
+            return 7;
+          } //if
+        } //if mc==3
+        //*SPECIFIC MOVE NUMBER 22: If you put an X in [1][1] after [2][2] the code will put a circle in [2][0]
+        let looking = true;
+        while (looking) {
+          squareNumber = round(random(1, 9));
+          row = floor((squareNumber - 1) / 3);
+          col = (squareNumber - 1) % 3;
+
+          if (grid1[row][col] == "0") {
+            looking = false;
+          } //the let looking checks to see if the code should stop running.
+        } //while
+        grid1[row][col] = "O";
+        return squareNumber;
+      } //crm
 
         function consoleOutput(x) {
             for (let i = 0; i < 3; i++) {
