@@ -115,11 +115,6 @@
             drawGrid();
             initArray(decisionArray);
             initArray(tempArray);
-
-            let resetButton = createButton('Reset');
-            resetButton.mousePressed(resetGame);
-            resetButton.parent('p5-sketch');
-            resetButton.position(250, 600);
         }
 
         function initArray(x) {
@@ -479,13 +474,13 @@
 
     <!-- Another Page Content -->
     <div id="another-page" class="page" style="display: none;">
-        <div class="tagembed-wrapper">
-            <iframe src="https://widget.tagembed.com/150360?view" style="width:100%;height:700px;overflow: auto;" frameborder="0" allowtransparency="true"></iframe>
-        </div>
-        <footer>
-            <p>&copy; This Website is tracked by Google Analytics</p>
-            <p><a href="#" onclick="showPage('home-page')">Go to Home Page</a></p>
-        </footer>
+    <div class="tagembed-wrapper">
+        <iframe src="https://widget.tagembed.com/150360?view" style="width:100%;height:700px;overflow: auto;" frameborder="0" allowtransparency="true"></iframe>
     </div>
+    <footer>
+        <p>&copy; This Website is tracked by Google Analytics</p>
+        <p><a href="#" onclick="showPage('home-page')">Go to Home Page</a></p>
+    </footer>
+</div>
 </body>
 </html>
